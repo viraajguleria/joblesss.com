@@ -14,15 +14,18 @@
         header {
             background-color: #f0f0f0;
             padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         h1 {
             text-align: center;
+            flex: 1;
         }
 
         nav {
             display: flex;
-            justify-content: space-around;
         }
 
         nav li {
@@ -66,6 +69,27 @@
             margin-bottom: 10px;
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .color-picker {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .color-picker input[type="color"] {
+            width: 50px;
+            padding: 5px;
+        }
+
         footer {
             background-color: #333;
             color: white;
@@ -78,28 +102,42 @@
     <header>
         <h1>My Website</h1>
         <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Funny Video (YouTube)</a></li>  <li><a href="https://twitter.com/">Twitter</a></li>
+            <li><a href="https://www.facebook.com/">Facebook</a></li>
         </nav>
     </header>
 
     <main>
         <section class="hero">
             <h2>Welcome!</h2>
-            <p>This is a basic website template with some cool features.</p>
+            <p>This website is full of cool features. Explore and have fun!</p>
             <button id="colorButton">Change Color</button>
         </section>
 
         <section class="content">
-            <h3>Here are some key features:</h3>
-            <ul>
-                <li>Clean and colorful design</li>
-                <li>Easy to understand and modify</li>
-                <li>Responsive layout (adjusts to different screen sizes)</li>
-            </ul>
+            <h3>Interesting Stuff:</h3>
+            <table border="1">
+                <tr>
+                    <th>Column 1</th>
+                    <th>Column 2</th>
+                </tr>
+                <tr>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
+                </tr>
+                <tr>
+                    <td>More Data</td>
+                    <td>Even More Data</td>
+                </tr>
+            </table>
+
+            <div class="color-picker">
+                <label for="colorInput">Pick a Color:</label>
+                <input type="color" id="colorInput" value="#f5f5f5">
+            </div>
         </section>
     </main>
 
@@ -109,11 +147,4 @@
 
     <script>
         const button = document.getElementById('colorButton');
-
-        button.addEventListener('click', function() {
-          const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-          document.body.style.backgroundColor = randomColor;
-        });
-    </script>
-</body>
-</html>
+        const
