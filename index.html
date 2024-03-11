@@ -4,7 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subject-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .subject-buttons button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 20px 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', cursive;
+            font-size: 18px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-buttons button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Optional: Individual button colors */
+        .subject-buttons button:nth-child(1) {
+            background-color: #f08080;
+        }
+
+        .subject-buttons button:nth-child(2) {
+            background-color: #90EE90;
+        }
+
+        .subject-buttons button:nth-child(3) {
+            background-color: #ADD8E6;
+        }
+
+        .subject-buttons button:nth-child(4) {
+            background-color: #ffd700;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Practice Portal!</h1>
@@ -17,11 +66,10 @@
     </div>
 
     <script>
-    // Function to handle subject selection (placeholder for future redirection)
-    function selectSubject(subject) {
-        alert("Selected subject: " + subject);
-        // Replace this with logic to redirect to the chosen subject page
-    }
+        function selectSubject(subject) {
+            alert("Selected subject: " + subject);
+            // Replace this with logic to redirect to the chosen subject page
+        }
     </script>
 </body>
 </html>
