@@ -3,148 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #f0f0f0;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 {
-            text-align: center;
-            flex: 1;
-        }
-
-        nav {
-            display: flex;
-        }
-
-        nav li {
-            list-style: none;
-            margin: 0 10px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        .hero {
-            background-color: #f5f5f5;
-            padding: 30px;
-            border-radius: 5px;
-        }
-
-        h2, p {
-            text-align: center;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .content {
-            margin-top: 20px;
-        }
-
-        h3 {
-            margin-bottom: 10px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .color-picker {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .color-picker input[type="color"] {
-            width: 50px;
-            padding: 5px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
+    <title>Practice Portal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>My Website</h1>
-        <nav>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Funny Video (YouTube)</a></li>  <li><a href="https://twitter.com/">Twitter</a></li>
-            <li><a href="https://www.facebook.com/vishal.guleria.39108/">Vishal's Facebook</a></li>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h2>Welcome Viraaj!</h2>
-            <p>This website is full of cool features. Explore and have fun!</p>
-            <button id="colorButton">Change Color</button>
-        </section>
-
-        <section class="content">
-            <h3>Interesting Stuff:</h3>
-            <table border="1">
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                </tr>
-                <tr>
-                    <td>Vishal Guleria</td>
-                    <td>38</td>
-                </tr>
-                <tr>
-                    <td>Viraaj Guleria</td>
-                    <td>8</td>
-                </tr>
-            </table>
-
-            <div class="color-picker">
-                <label for="colorInput">Pick a Color:</label>
-                <input type="color" id="colorInput" value="#f5f5f5">
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 My Website</p>
-    </footer>
+    <h1>Welcome to Practice Portal!</h1>
+    <p>Choose a subject to practice:</p>
+    <div class="subject-buttons">
+        <button onclick="selectSubject('Mathematics')">Mathematics</button>
+        <button onclick="selectSubject('Science')">Science</button>
+        <button onclick="selectSubject('English')">English</button>
+        <button onclick="selectSubject('General Knowledge')">General Knowledge</button>
+    </div>
 
     <script>
-        const button = document.getElementById('colorButton');
-        const
+    // Function to handle subject selection (placeholder for future redirection)
+    function selectSubject(subject) {
+        alert("Selected subject: " + subject);
+        // Replace this with logic to redirect to the chosen subject page
+    }
+    </script>
+</body>
+</html>
