@@ -17,6 +17,32 @@ margin-left: 20px;
 background-color: yellow;
 color: blue; 	
 }
+
+  //NEW CODE START
+  <button class="button">Click Me</button>
+.button {
+  /* Basic button styling */
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+  
+  /* 3D effect with box-shadow and gradients */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #444 0%, #333 100%);
+  background-position: 0 1px; /* Slight offset for better shadow */
+  transition: all 0.2s ease-in-out; /* Smooth transition on hover */
+}
+
+.button:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Shorten shadow on hover */
+  background-position: 0 0; /* Remove offset for pressed effect */
+}
+//NEW CODE END
 </style>
 </head>
 <body>
