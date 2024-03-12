@@ -21,24 +21,24 @@ color: blue;
 </head>
 <body>
 <center>
-<i id="hello">score - 0</i><br/>
-<i>What is the capital of france?</i><br/>
-<button><i onclick="correct()">Paris</i></button> <button><i onclick="wrong()">Delhi</i></button> <button><i onclick="wrong()">Ulaanbaatur</i></button> <button><i onclick="wrong()">Washington</i></button>
+<i id="hello">score - 3</i><br/>
+<i>What is the capital of Mongolia</i><br/>
+<button><i onclick="correct()">Ulaanbaatur</i></button> <button><i onclick="wrong()">Delhi</i></button> <button><i onclick="wrong()">Kuala Lumpur</i></button> <button><i onclick="wrong()">Washington</i></button>
 <br/>
 <button onclick="helloo()">go to next page</button>
 
 </center>
 <script>
 function correct() {
-document.getElementById("hello").innerHTML = 'score - 1';
+document.getElementById("hello").innerHTML = 'score - 4';
 }
 
 function helloo() {
 var hello = document.getElementById("hello").innerHTML;
 
-if (hello == "score - 1") {
+if (hello == "score - 4") {
 var newLink = document.createElement('a');
-newLink.href = "question1.html";
+newLink.href = 'my q 5.html';
 document.body.appendChild(newLink);
 newLink.click();
 document.body.removeChild(newLink);
@@ -49,4 +49,4 @@ alert('please first finish the first question before going on next question');
 }
 </script>
 </body>
-</html> 
+</html>
