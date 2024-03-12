@@ -1,0 +1,52 @@
+<html>
+<head>
+<style>
+i {
+background-color: yellow;
+color: blue;
+
+}
+
+button {
+width: 250px;
+height: 150px;
+border: 50px solid brown;
+margin-bottom: 10px;
+margin-top: 10px;
+margin-left: 20px; 
+background-color: yellow;
+color: blue; 	
+}
+</style>
+</head>
+<body>
+<center>
+<i id="hello">score - 2</i><br/>
+<i>What is the capital of India</i><br/>
+<button><i onclick="wrong()">Paris</i></button> <button><i onclick="wrong()">Chandigar</i></button> <button><i onclick="correct()">Delhi</i></button> <button><i onclick="wrong()">Washington</i></button>
+<br/>
+<button onclick="helloo()">go to next page</button>
+
+</center>
+<script>
+function correct() {
+document.getElementById("hello").innerHTML = 'score - 3';
+}
+
+function helloo() {
+var hello = document.getElementById("hello").innerHTML;
+
+if (hello == "score - 3") {
+var newLink = document.createElement('a');
+newLink.href = 'important.html';
+document.body.appendChild(newLink);
+newLink.click();
+document.body.removeChild(newLink);
+}
+else {
+alert('please first finish the first question before going on next question');
+}
+}
+</script>
+</body>
+</html>
