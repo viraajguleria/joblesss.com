@@ -1,10 +1,66 @@
-<html>
-    <head>
-        <title>Navigation bar</title>
-    </head>
-    <body>
-        <center>
-            <a href="ToDoList.html">To - Do - List</a>
-        </center>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        /* Basic CSS to style the navigation bar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the left menu */
+        .navbar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        /* Styling the links inside the navbar */
+        .navbar a {
+            display: block;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        /* Change color when hovering over links */
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Content area that will not be overlapped by the navbar */
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Side Navigation Bar -->
+    <div class="navbar">
+        <a href="ToDoList.html">To - Do - List</a>
+        <a href="question1.html">Question 1</a>
+        <a href="question3.html">Question 3</a>
+        <a href="question4.html">Question 4</a>
+        <!-- Add more links as needed -->
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+        <h1>Welcome to the Website</h1>
+        <p>This is the content area where the main content of your website will go.</p>
+    </div>
+
+</body>
 </html>
