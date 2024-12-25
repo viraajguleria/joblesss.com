@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>my's websites 19.</title>
+        <meta name="description" content="My's websites 19.">
+    </head>
+    <body>
+        <center>
+            <input id="inputer1" style="width: 500px; height: 50px; font-size: 25px;" placeholder="Please type the seconds that you want :-" type="text">
+            <br><br>
+            <input id="inputer2" style="width: 500px; height: 50px; font-size: 25px;" placeholder="Please type the letter length you want :-" type="text">
+            <br><br>
+            <button onclick="goFunction()" style="width: 500px; height: 50px;">Click me</button>
+            <br><br>
+            <textarea id="texter" cols="100" rows="20" placeholder="Please type"></textarea>
+            <br><br>
+            <p id="timer2" style="font-size: 25px;"></p>
+        </center>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let text = 0;   
+            let timer = 0;
+
+            function goFunction() {
+                timer = parseInt(document.getElementById("inputer1").value);
+                text = parseInt(document.getElementById("inputer2").value);
+
+                document.getElementById("timer2").innerHTML = timer;
+
+                const setTimer = setInterval(() => {
+                    timer--;
+                    document.getElementById("timer2").innerHTML = timer;
+
+                    let length = document.getElementById("texter").value.length;
+
+                    if (timer === 0) {
+                        clearInterval(setTimer);
+
+                        if (length >= text) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Mission complete!",
+                                text: "You completed your mission 😃",
+                                confirmButtonText: "Thank You :-",
+                                confirmButtonColor: "blue"
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Mission destroyed!",
+                                text: "You could not complete your mission 😟",
+                                confirmButtonText: "Try again :-",
+                                confirmButtonColor: "red"
+                            });
+                        }
+                    }
+                }, 1000);
+            }
+
+            document.title = localStorage.getItem('websiteTitle') || 'Default Title';
+        </script>
+    </body>
+</html>
