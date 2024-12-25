@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>my's websites 14.</title>
+        <style>
+            body {
+                background-color: blue;
+            }
+
+            .stopWatch {
+                border: 10px solid white;
+                border-radius: 20px;
+                width: 1100px;
+            }
+
+            .hours, .minutes, .seconds {
+                width: 300px;
+                height: 200px;
+                border: 5px solid blue;
+                margin-top: 100px;
+                margin-bottom: 100px;
+                font-size: 80px;
+                font-family: bold;
+                background-color: blue;
+                color: white;
+            }
+
+            .buttonsSection {
+                border: 5px solid white;
+                border-radius: 10px;
+                width: 850px;
+            }
+
+            .startButton, .stopButton, .resetButton {
+                width: 150px;
+                height: 150px;
+                border: 2.5px solid white;
+                border-radius: 150px;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                font-size: 40px;
+                font-family: bold;
+                background-color: blue;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <div class="stopWatch">
+                <button id="hours" class="hours">0</button>
+                <button id="minutes" class="minutes">0</button>
+                <button id="seconds" class="seconds">0</button>
+            </div>
+            <br>
+            <br>
+            <div class="buttonsSection">
+                <button onclick="startEvent()" class="startButton">Start</button>
+                <button onclick="stopEvent()" class="stopButton">Stop</button>
+                <button onclick="resetEvent()" class="resetButton">Reset</button>
+            </div>
+        </center>
+        <script>
+            let seconds = 0;
+            let minutes = 0;
+            let hours = 0;
+            let starter;
+
+            function startEvent() {
+                 starter = setInterval(() => {
+                    seconds += 1; 
+                    document.getElementById("seconds").innerHTML = seconds;
+
+                    if (seconds == 59) {
+                        seconds = 0;
+                        minutes += 1;
+                        document.getElementById("minutes").innerHTML = minutes;
+                    }
+
+                    if (minutes == 59) {
+                        seconds = 0;
+                        minutes = 0;
+                        hours += 1;
+                        document.getElementById("hours").innerHTML = hours;
+                    }
+
+                }, 1000);
+            }
+
+
+            function stopEvent() {
+                clearInterval(starter);
+                starter = null;
+            }
+
+            function resetEvent() {
+                clearInterval(starter);
+                starter = null;
+
+                var seconds = document.getElementById("seconds").innerHTML;
+                var minutes = document.getElementById("minutes").innerHTML;
+                var hours = document.getElementById("hours").innerHTML;
+
+                document.getElementById("seconds").innerHTML = 0;
+                document.getElementById("minutes").innerHTML = 0;
+                document.getElementById("hours").innerHTML = 0;
+            }
+        </script>
+    </body>
+</html>
