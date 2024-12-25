@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation Bar</title>
+    <title>Dynamic Content with Left Navigation Bar</title>
     <style>
         /* Basic CSS to style the navigation bar */
         body {
@@ -43,24 +43,38 @@
             margin-left: 220px;
             padding: 20px;
         }
+
+        /* iframe style */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
 
     <!-- Left Side Navigation Bar -->
     <div class="navbar">
-        <a href="ToDoList.html">To - Do - List</a>
-        <a href="question1.html">Question 1</a>
-        <a href="question3.html">Question 3</a>
-        <a href="question4.html">Question 4</a>
+        <a href="javascript:void(0);" onclick="loadPage('ToDoList.html')">To-Do List</a>
+        <a href="javascript:void(0);" onclick="loadPage('question1.html')">Question1</a>
+        <a href="javascript:void(0);" onclick="loadPage('question3.html')">Question3</a>
+        <a href="javascript:void(0);" onclick="loadPage('question4.html')">Question4</a>
         <!-- Add more links as needed -->
     </div>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area (iframe to load pages) -->
     <div class="content">
-        <h1>Welcome to the Website</h1>
-        <p>This is the content area where the main content of your website will go.</p>
+        <iframe id="contentFrame" src="ToDoList.html" title="Content"></iframe>
     </div>
+
+    <script>
+        // JavaScript function to load the selected page in the iframe
+        function loadPage(page) {
+            // Change the src attribute of the iframe to load the selected page
+            document.getElementById('contentFrame').src = page;
+        }
+    </script>
 
 </body>
 </html>
