@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>my's websites 3.</title>
+        <style>
+            #mmScreen {
+                width: 100px;
+                height: 100px;
+                border: 5px solid black;
+                border-radius: 100px;
+                font-size: 20px;
+            }
+         </style>
+    </head>
+    <body>
+        <center>
+            <div id="mmScreen" class="mmScreen"></div>
+            <br>
+            <br>
+            <input id="mmChecker" placeholder="Type how much money you want to make: " type="text">
+            <br>
+            <br>
+            <button onclick="confirm()">Confirm</button>
+        </center>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            let money = 0;
+            let time;
+
+            function confirm() {
+                var mmChecker = document.getElementById("mmChecker").value;
+
+                time = setInterval(() => {
+                    money++;
+
+                    document.getElementById("mmScreen").innerHTML = money;
+
+                    if (money == mmChecker) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Congrats",
+                            text: "Money made successfully",
+                            confirmButtonText: "Store the money in bank acount"
+                        });
+                    }
+
+                },1);
+            }   
+        </script>
+    </body>
+</html>
