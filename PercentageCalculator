@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <style>
+            #FontFamily {
+                position: absolute;
+                left: 25%;
+                top: 5%;
+                width: 50%;
+                height: 5%; 
+                border: 2px solid black;
+                font-size: 150%;
+            }
+
+            #InputChecker {
+                position: absolute;
+                top: 15%;
+                left: 37.5%;
+                width: 25%;
+                height: 5%;
+                border: 2px solid black;
+                font-size: 150%;
+                background-color: white;
+            }
+
+            #InputChecker:hover {
+                background-color: whitesmoke;
+            }
+
+            #size10 {
+                position: absolute;
+                left: 17.75%;
+                top: 30%;
+                width: 10%;
+                height: 17.78%;
+                border-radius: 107.8%;
+                background-color: white;
+                font-size: 15px;
+            }
+        
+            #size20 {
+                position: absolute;
+                left: 30.25%;
+                top: 30%;
+                width: 10%;
+                height: 17.78%;
+                border-radius: 107.8%;
+                background-color: white;
+                font-size: 15px;
+            }
+
+            #size30 {
+                position: absolute;
+                left: 42.75%;
+                top: 30%;
+                width: 10%;
+                height: 17.78%;
+                border-radius: 107.8%;
+                background-color: white;
+                font-size: 15px;
+            }
+
+            #size40 {
+                position: absolute;
+                left: 55.25%;
+                top: 30%;
+                width: 10%;
+                height: 17.78%;
+                border-radius: 107.8%;
+                background-color: white;
+                font-size: 15px;
+            }
+
+            #size50 {
+                position: absolute;
+                left: 67.75%;
+                top: 30%;
+                width: 10%;
+                height: 17.78%;
+                border-radius: 107.8%;
+                background-color: white;
+                font-size: 15px;
+            }
+
+            #Phone {
+                position: absolute;
+                left: 37.5%;
+                top: 35%;
+                width: 25%;
+                height: 70%;
+                border: 5px solid black;
+                border-top: 50px solid black;
+                border-bottom: 50px solid black;
+                border-radius: 50px;
+                rotate: 90deg;
+                border-right: 10px solid black;
+                border-left: 10px solid black;
+            }
+            
+            body {
+                height: 200%;
+            }
+
+            #IphoneButton {
+                position: absolute;
+                top: 1%;
+                left: 42.5%;
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+                border: 2px solid black;
+            }
+
+            #Text {
+                rotate: -90deg;
+                position: absolute;
+                top: 50%;
+                left: 25%;
+            }
+        </style>
+    </head> 
+    <body>
+        <center>
+            <input id="FontFamily" placeholder="Please type a font family" type="text">
+            <button onclick="CreateStyle()" id="InputChecker">Confirm Font-Family</button>
+
+            <button onclick="CreateSize1()" id="size10">Set Font size 10 pixels</button>
+            <button onclick="CreateSize2()" id="size20">Set Font size 20 pixels</button>
+            <button onclick="CreateSize3()" id="size30">Set Font size 30 pixels</button>
+            <button onclick="CreateSize4()" id="size40">Set Font size 40 pixels</button>
+            <button onclick="CreateSize5()" id="size50">Set Font size 50 pixels</button>
+
+            <div id="Phone">
+                <div id="Text">This is Iphone 1000<sup>1000</sup> pro max</div>
+                <div id="IphoneButton"></div>
+            </div>
+        </center>
+        <script>
+            function CreateStyle() {
+                var FontFamily = document.getElementById("FontFamily").value;
+
+                document.getElementById("Text").style.fontFamily = FontFamily;
+            }
+
+            function CreateSize1() {
+                document.getElementById("Text").style.fontSize = "10px";
+            }
+
+            function CreateSize2() {
+                document.getElementById("Text").style.fontSize = "20px";
+            }
+
+            function CreateSize3() {
+                document.getElementById("Text").style.fontSize = "30px";
+            }
+
+            function CreateSize4() {
+                document.getElementById("Text").style.fontSize = "40px";
+            }
+
+            function CreateSize5() {
+                document.getElementById("Text").style.fontSize = "50px";
+            }
+        </script>
+    </body>
+</html>
