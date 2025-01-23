@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>my's websites 1.</title>
+        <style>
+            .body {
+                background-color: rgb(184, 213, 230);
+            }
+
+            .calculatorBody {
+                border: 5px solid black;
+                width: 1000px;
+                border-radius: 10px;
+                height: 500px;
+            }
+
+            .mainCalculator {
+                margin-top: 50px;
+                width: 800px;
+                height: 50px;
+                font-size: 30px;
+            }
+
+            .input1 {
+                margin-top: 25px;
+                width: 263px;
+                height: 30px;
+                font-size: 20px;
+            }
+            
+            .input2 {
+                margin-top: 25px;
+                width: 263px;
+                height: 30px;
+                font-size: 20px;
+            }
+
+            
+            .input3 {
+                margin-top: 25px;
+                width: 264px;
+                height: 30px;
+                font-size: 20px;
+            }
+
+            .buttons {
+                margin-top: 25px;
+                width: 264px;
+                height: 30px;
+                font-size: 20px;
+                background-color: white;
+                border: 1px solid black;
+            }
+
+            .whereTo {
+                margin-top: 25px;
+                width: 264px;
+                height: 30px;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <div class="calculatorBody">
+                <input placeholder="Your answer will be here ..." id="mainAnswer" class="mainCalculator" type="text">
+                <br>
+                <br>
+                <input placeholder="Principle ..." id="principle" class="input1" type="number">
+                <input placeholder="Rate ..." id="rate" class="input2" type type="number">
+                <input placeholder="Years ..." id="years" class="input3" type type="number">
+                <br>
+                <br>
+                <button onclick="sendNumber('1')" class="buttons">1</button>
+                <button onclick="sendNumber('2')" class="buttons">2</button>
+                <button onclick="sendNumber('3')" class="buttons">3</button>
+                <br>
+                <br>
+                <button onclick="sendNumber('4')" class="buttons">4</button>
+                <button onclick="sendNumber('5')" class="buttons">5</button>
+                <button onclick="sendNumber('6')" class="buttons">6</button>
+                <br>
+                <br>
+                <button onclick="sendNumber('7')" class="buttons">7</button>
+                <button onclick="sendNumber('8')" class="buttons">8</button>
+                <button onclick="sendNumber('9')" class="buttons">9</button>
+                <br>
+                <br>
+                <button onclick="sendNumber('0')" class="buttons">0</button>
+                <button onclick="calculate()" class="buttons">=</button>
+                <input placeholder="Type here where to send N" id="whereTo" class="whereTo" type="text">
+            </div>
+        </center>
+        <script>        
+        function sendNumber(num) {
+            var whereTo = document.getElementById("whereTo").value;
+            if (whereTo === "Principle") {
+                document.getElementById("principle").value += num;
+            } else if (whereTo === "Rate") {
+                document.getElementById("rate").value += num;
+            } else if (whereTo === "Years") {
+                document.getElementById("years").value += num;
+            }
+        }
+
+        function calculate() {
+            var principle = parseInt(document.getElementById("principle").value);
+            var rate = parseInt(document.getElementById("rate").value);
+            var years = parseInt(document.getElementById("years").value);
+
+            var mainAnswer = (principle * rate * years / 100 + principle);
+
+            document.getElementById("mainAnswer").value = mainAnswer;   
+        }
+        </script>
+    </body>
+</html>
