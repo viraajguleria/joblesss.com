@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Bill</title>
+    <style>
+        #Column2 {
+            position: absolute;
+            left: 10%;
+            top: 5%;
+            width: 80%;
+            height: 40%;
+            border: 5px solid lightgreen;
+        }
+
+        #ColumnInputButton {
+            position: absolute;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            border: 2.5px solid black;   
+            background-color: aqua;     
+            color: orange;        
+        }
+
+        #ColumnInputButton:hover {
+            background-color: rgb(134, 255, 255);
+            color: orangered;
+        }
+
+        #Bill {
+            position: absolute;
+            top: 125%;
+            left: 5%;
+            width: 90%;
+            border: 2.5px solid black;
+        }
+
+        .bill-header, .bill-row {
+            display: flex;
+            width: 100%;
+        }
+
+        .bill-header div, .bill-row div {
+            width: 25%;
+            text-align: center;
+            height: 50px;
+            border: 2.5px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bill-header {
+            background-color: lightgray;
+            font-weight: bold;
+        }
+
+        body {
+            height: 1000%;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div id="Column2">
+            <button onclick="AddColumn()" id="ColumnInputButton">Click to add a column :-</button>
+        </div>
+
+        <div id="Bill">
+            <div class="bill-header">
+                <div>Name Of Item</div>
+                <div>Rate Of Item</div>
+                <div>Quantity Of Item</div>
+                <div>Total Rate Of Item</div>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        let rateCount = 0;
+
+        function AddColumn() {
+            rateCount++; 
+
+            let bill = document.getElementById('Bill');
+
+            let row = document.createElement('div');
+            row.className = "bill-row";
+
+            // Prompt to enter the name of the item
+            let itemName = prompt(`Enter the name for item ${rateCount}:`, `Item ${rateCount}`);
+
+            // Prompt to enter the rate and quantity for the item
+            let userRate = prompt(`Enter the rate for item ${rateCount}:`, "0");
+            let userQuantity = prompt(`Enter quantity for item ${rateCount}:`, "1");
+
+            let name = document.createElement('div');
+            name.innerText = itemName;
+
+            let rate = document.createElement('div');
+            rate.innerText = `₹ ${userRate}`;
+
+            let quantity = document.createElement('div');
+            quantity.innerText = userQuantity;
+
+            let total = document.createElement('div');
+            let totalValue = parseFloat(userRate) * parseInt(userQuantity);
+            total.innerText = `₹ ${totalValue}`;
+
+            row.appendChild(name);
+            row.appendChild(rate);
+            row.appendChild(quantity);
+            row.appendChild(total);
+
+            bill.appendChild(row);
+
+            alert(`Item ${rateCount} Added: Name: ${itemName}, Rate: ₹${userRate}, Quantity: ${userQuantity}, Total: ₹${totalValue}`);
+        }
+
+        window.onload = function() {
+            AddColumn();
+        };
+    </script>
+</body>
+</html>
