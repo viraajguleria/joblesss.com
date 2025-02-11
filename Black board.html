@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: black;
+                height: 92%;
+                touch-action: none;
+            }
+
+            #ClearButton {
+                position: absolute;
+                left: 85%;
+                top: 35%;
+                width: 15%;
+                height: 30%;
+                rotate: -90deg;
+            }
+
+            #Image {
+                height: 100%;
+                width: 100%;
+            }
+
+            #MainPad {
+                color: white; /* Set text color to white to be visible on black background */
+                width: 80%;
+                height: 50%; /* Adjust as needed */
+                margin: 0 auto; /* Center the pad */
+                padding: 10px;
+                overflow: auto; /* In case the content exceeds the size */
+            }
+
+        </style>
+    </head>
+    <body>
+        <center>
+            <button onclick="ClearText()" id="ClearButton">
+                <img id="Image" src="37. A DustBin Button Image.jpg">
+            </button>
+        </center>
+        <div id="MainPad" contenteditable="true">
+        </div>
+        <script>
+             document.addEventListener('touchstart', function(event) {
+                var touch = event.touches[0];
+                var xPos = touch.clientX;
+                var yPos = touch.clientY;
+
+                drawDot(xPos, yPos);
+            }, false);
+
+            document.addEventListener('touchmove', function(event) {
+                var touch = event.touches[0];
+                var xPos = touch.clientX;
+                var yPos = touch.clientY;
+
+                drawDot(xPos, yPos);
+            }, false);
+
+            document.addEventListener('touchend', function(event) {
+                console.log('Touch ended');
+            }, false);
+
+            function drawDot(x, y) {
+                var dot = document.createElement('div');
+                dot.style.position = 'absolute';
+                dot.style.left = (x - 10) + 'px';
+                dot.style.top = (y - 10) + 'px';
+                dot.style.width = '10px';
+                dot.style.height = '10px';
+                dot.style.borderRadius = '5px';
+                dot.style.backgroundColor = 'aqua';
+                document.body.appendChild(dot);
+            }
+
+            function ClearText() {
+               //debugger;  // Remove or comment out debugger in production
+                document.getElementById("MainPad").innerText = "";
+                //document.body.style.backgroundColor = "black"; // Not necessary, the body already has black bg
+                //document.getElementById("ClearButton").style.visibility = "visible"; // Also not needed
+
+                //Clear all the dots
+                const dots = document.querySelectorAll('div');
+                dots.forEach(dot => {
+                   if (dot.style.borderRadius === '5px'){
+                       dot.remove();
+                   }
+                });
+
+            }
+        </script>
+    </body>
+</html>
