@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Move Player with Cursor</title>
+    <style>
+        body {
+            background-image: url("38. C. FootBall Area.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #Player {
+            width: 30%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #Circle {
+            height: 10%;
+            position: absolute;
+            left: 60%;
+            top: 60%;
+        }
+    </style>
+</head>
+<body>
+    <img id="Player" src="38. A. Foot ball player.png">
+    <img id="Circle" src="38. B. Ball.png">
+
+    <script>
+        document.addEventListener("mousemove", function(event) {
+            let player = document.getElementById("Player");
+            let circle = document.getElementById("Circle");
+
+            player.style.left = event.clientX + "px";
+            player.style.top = event.clientY + "px";
+
+            let playerRect = player.getBoundingClientRect();
+            let circleRect = circle.getBoundingClientRect();
+
+            if (
+                playerRect.top < circleRect.bottom &&
+                playerRect.bottom > circleRect.top &&
+                playerRect.left < circleRect.right &&
+                playerRect.right > circleRect.left
+            ) {
+
+                let randomX = Math.floor(Math.random() * (window.innerWidth - 50)); 
+                let randomY = Math.floor(Math.random() * (window.innerHeight - 50));
+
+                circle.style.left = randomX + "px";
+                circle.style.top = randomY + "px";
+            }
+        });
+    </script>
+</body>
+</html>
