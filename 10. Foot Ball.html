@@ -3,12 +3,20 @@
     <title>Move Player with Cursor</title>
     <style>
         body {
-            background-image: url("38. C. FootBall Area.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 0;
-            overflow: hidden;
-        }
+    background-image: url("38. C. FootBall Area.png");
+    background-repeat: no-repeat;
+    background-size: contain; /* Ensures the full image is visible */
+    background-position: center; /* Centers the image */
+    margin: 0;
+    padding: 5em; /* Adds equal spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 10em); /* Ensures height respects margin */
+    width: calc(100vw - 10em); /* Ensures width respects margin */
+    overflow: hidden;
+}
+
 
         #Player {
             width: 30%;
