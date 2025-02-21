@@ -3,19 +3,20 @@
     <title>Move Player with Cursor</title>
     <style>
         body {
-    background-image: url("38. C. FootBall Area.png");
-    background-repeat: no-repeat;
-    background-size: contain; /* Ensures the full image is visible */
-    background-position: center; /* Centers the image */
-    margin: 0;
-    padding: 5em; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 10em); /* Ensures height respects margin */
-    width: calc(100vw - 10em); /* Ensures width respects margin */
-    overflow: hidden;
-}
+            background-image: url("38. C. FootBall Area.png");
+            background-repeat: no-repeat;
+            background-size: contain; 
+            background-position: center; 
+            margin: 0;
+            padding: 5em; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 10em); 
+            width: calc(100vw - 10em); 
+            overflow: hidden;
+
+        }
 
 
         #Player {
@@ -34,12 +35,16 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
     <img id="Player" src="38. A. Foot ball player.png">
     <img id="Circle" src="38. B. Ball.png">
+    <audio id="sound" style="display: none;" src="sound.mp3"></audio>
 
     <script>
+        let TotalGoals = 0;
+
         document.addEventListener("mousemove", function(event) {
+            
             let player = document.getElementById("Player");
             let circle = document.getElementById("Circle");
 
@@ -61,8 +66,61 @@
 
                 circle.style.left = randomX + "px";
                 circle.style.top = randomY + "px";
+
+                ShowMassage();
             }
         });
+
+        function ShowMassage() {
+            TotalGoals++;
+
+            const message = document.createElement("div");
+            message.id = "message";
+            message.style.width = "50%";
+            message.style.height = "50%";
+            message.style.position = "absolute";
+            message.style.left = "25%";
+            message.style.top = "0";
+            message.style.border = "2px solid black";
+            message.style.borderRadius = "5px";
+            message.style.backgroundColor = "aqua";
+            message.style.alignItems = "center";  
+
+
+            const message2 = document.createElement("p");
+            message2.id = "message2"; 
+            message2.style.fontSize = "50px";
+            message2.style.fontFamily = "Cooper Black";
+            message2.innerText = "Goal !";
+            message2.style.width = "50%"
+            message2.style.position = "absolute";
+            message2.style.top = "-20%";
+            message2.style.left = "35%";
+
+            const message3 = document.createElement("p");
+            message3.id = "message3";
+            message3.style.position = "absolute";
+            message3.style.left = "25%";
+            message3.style.top = "20%";
+            message3.style.fontSize = "50px";
+            message3.innerText = "Total Goals: " + TotalGoals;
+
+
+            message.appendChild(message2);
+            message.appendChild(message3);
+
+            const body = document.getElementById("body");
+            if (!body) {
+                console.error("Body element not found! Ensure <body id='body'> exists.");
+                return;
+            }
+            body.appendChild(message);
+
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+
     </script>
 </body>
 </html>
