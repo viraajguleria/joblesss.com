@@ -87,23 +87,26 @@
             message.style.alignItems = "center";  
 
 
-            const message2 = document.createElement("p");
+            const message2 = document.createElement("button");
             message2.id = "message2"; 
             message2.style.fontSize = "50px";
-            message2.style.fontFamily = "Cooper Black";
             message2.innerText = "Goal !";
             message2.style.width = "50%"
             message2.style.position = "absolute";
-            message2.style.top = "-20%";
-            message2.style.left = "35%";
+            message2.style.left = "25%";
+            message2.style.border = "1px solid aqua";
+            message2.style.backgroundColor = "aqua";
 
-            const message3 = document.createElement("p");
+
+            const message3 = document.createElement("button");
             message3.id = "message3";
-            message3.style.position = "absolute";
-            message3.style.left = "25%";
-            message3.style.top = "20%";
             message3.style.fontSize = "50px";
             message3.innerText = "Total Goals: " + TotalGoals;
+            message3.style.position = "absolute";
+            message3.style.left = "25%";
+            message3.style.border = "1px solid aqua";
+            message3.style.backgroundColor = "aqua";
+            message3.style.top = "35%";
 
 
             message.appendChild(message2);
