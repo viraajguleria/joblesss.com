@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #Button1 {
+                border-top: 100px solid red;
+                border-right: 40px solid transparent;
+                border-bottom: 0 solid transparent;
+                border-left: 40px solid transparent;
+                background-color: white;
+                width: 20%;
+                position: absolute;
+                left: 0;
+            }
+
+            #PipeA1 {
+                width: 30px;
+                height: 300px;
+                position: absolute;
+                left: 39px;
+                background-color: red;
+            }
+
+            #PipeA2 {
+                width: 30px;
+                height: 200px;
+                position: absolute;
+                left: 176px;
+                background-color: red;
+            }
+
+            #PipeB1 {
+                width: 30px;
+                height: 250px;
+                position: absolute;
+                left: 286px;
+                background-color: red;
+                rotate: 90deg;
+                top: 68px;
+            }   
+
+            #PipeB2 {
+                width: 30px;
+                height: 250px;
+                position: absolute;
+                left: 149px;
+                background-color: red;
+                rotate: 90deg;
+                top: 180px;
+            }
+            
+            .candy {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                position: absolute;
+                left: 110px;
+                top: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <button onclick="SpawnCandy()" id="Button1"></button>
+            <div id="PipeA1"></div>
+            <div id="PipeA2"></div>
+            <div id="PipeB1"></div>
+            <div id="PipeB2"></div>
+        </center>
+        <script>
+            function getRandomColor() {
+                const colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink"];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            function SpawnCandy() {
+                const candy = document.createElement("div");
+                candy.classList.add("candy");
+                candy.style.backgroundColor = getRandomColor();
+                candy.style.border = `1px solid ${candy.style.backgroundColor}`;
+                document.body.appendChild(candy);
+                
+                let positionY = 100;
+                let positionX = 110;
+                let movingRight = false;
+                let movingDownAgain = false;
+                let randomFinalX = Math.floor(Math.random() * 300) + 50; // Randomize final fall X position
+                let speed = 2;
+                let groundLevel = 550;
+                let bounceHeight = 50; // Initial bounce height
+                let bounces = 3; // Number of times the ball will bounce
+
+                let interval = setInterval(() => {
+                    if (!movingRight) {
+                        if (positionY < 262) { 
+                            positionY += speed;
+                            candy.style.top = positionY + "px";
+                        } else {
+                            movingRight = true;
+                        }
+                    } else if (!movingDownAgain) {
+                        if (positionX < 1000) {
+                            positionX += speed;
+                            candy.style.left = positionX + "px";
+                        } else {
+                            movingDownAgain = true;
+                            candy.style.left = randomFinalX + "px"; // Set random X position
+                        }
+                    } else {
+                        if (positionY < 10000) { // Falling phase
+                            positionY += speed;
+                            candy.style.top = positionY + "px";
+                        } else {
+                            if (bounces > 0) {
+                                let bounceUp = setInterval(() => {
+                                    if (positionY > groundLevel - bounceHeight) {
+                                        positionY -= speed;
+                                        candy.style.top = positionY + "px";
+                                    } else {
+                                        clearInterval(bounceUp);
+                                        let bounceDown = setInterval(() => {
+                                            if (positionY < groundLevel) {
+                                                positionY += speed;
+                                                candy.style.top = positionY + "px";
+                                            } else {
+                                                clearInterval(bounceDown);
+                                                bounces--;
+                                                bounceHeight /= 2; // Reduce bounce height
+                                            }
+                                        }, 10);
+                                    }
+                                }, 10);
+                            } else {
+                                clearInterval(interval);
+                            }
+                        }
+                    }
+                }, 10);
+            }
+        </script>
+    </body>
+</html>
