@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>Free Fire But 2D 🔫</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+
+            #Sniper {
+                border: 5px solid black;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                position: absolute;
+                background-color: transparent;
+                pointer-events: none;
+            }
+
+            .target {
+                border: 5px solid red;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                position: absolute;
+                background-color: red;
+            }
+
+            #ScoreKeeper {
+                position: absolute;
+                left: 20px;
+                top: 10px;
+                font-size: 30px;
+                color: black;
+                background-color: white;
+                padding: 10px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="Sniper"></div>
+        <div id="Target1" class="target"></div>
+        <div id="Target2" class="target"></div>
+        <div id="Target3" class="target"></div>
+        <div id="ScoreKeeper" style="background: transparent;">Score: 0</div>
+
+        <script>
+            const sniper = document.getElementById("Sniper");
+            const scoreDisplay = document.getElementById("ScoreKeeper");
+            let Score = 0;
+
+            const targets = [
+                document.getElementById("Target1"),
+                document.getElementById("Target2"),
+                document.getElementById("Target3"),
+            ];
+
+            function getRandomPosition() {
+                let x = Math.floor(Math.random() * (window.innerWidth - 60)); 
+                let y = Math.floor(Math.random() * (window.innerHeight - 60));
+                return { x, y };
+            }
+
+            function moveTargets() {
+                targets.forEach(target => {
+                    let pos = getRandomPosition();
+                    target.style.left = pos.x + "px";
+                    target.style.top = pos.y + "px";
+                });
+            }
+
+            moveTargets();
+
+            document.addEventListener("mousemove", function(event) {
+                let x = event.clientX - 25; 
+                let y = event.clientY - 25;
+                sniper.style.left = x + "px";
+                sniper.style.top = y + "px";
+            });
+
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "s") {
+                    let sniperX = parseInt(sniper.style.left);
+                    let sniperY = parseInt(sniper.style.top);
+
+                    targets.forEach(target => {
+                        let targetX = parseInt(target.style.left);
+                        let targetY = parseInt(target.style.top);
+
+                        if (
+                            sniperX < targetX + 50 &&
+                            sniperX + 50 > targetX &&
+                            sniperY < targetY + 50 &&
+                            sniperY + 50 > targetY
+                        ) {
+                            moveTargets(); 
+                            Score += 1;
+                            scoreDisplay.innerText = "Score: " + Score;
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
