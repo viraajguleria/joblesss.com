@@ -1,0 +1,82 @@
+<html>
+<head>
+    <style>
+        #Basket {
+            background-color: black;
+            width: 5%;
+            height: 5%;
+            position: absolute;
+            top: 90%;
+            left: 47.5%;
+        }
+
+        .Cloth {
+            background-color: red;
+            width: 5%;
+            height: 5%;
+            position: absolute;
+            top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Score: <span id="score">0</span></h1>
+        <div id="Basket"></div>
+    </center>
+    
+    <script>
+        let LeftPosition = 47.5;
+        let score = 0;
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowLeft") {
+                LeftPosition -= 5;
+                if (LeftPosition < 0) LeftPosition = 0; 
+                document.getElementById("Basket").style.left = LeftPosition + "%";   
+            } else if (event.key === "ArrowRight") {
+                LeftPosition += 5;
+                if (LeftPosition > 95) LeftPosition = 95; 
+                document.getElementById("Basket").style.left = LeftPosition + "%";   
+            }   
+        });
+
+        function spawnCloth() {
+            let RandomNumber1 = Math.floor(Math.random() * 90);
+
+            const Cloth = document.createElement("div");
+            Cloth.className = "Cloth";
+            Cloth.style.left = RandomNumber1 + "%";
+            document.body.appendChild(Cloth);
+
+            let topPosition = 5;
+
+            function fall() {
+                if (topPosition < 90) {
+                    topPosition += 1;
+                    Cloth.style.top = topPosition + "%";
+                    requestAnimationFrame(fall);
+                } else {
+                    checkCollision(Cloth);
+                    document.body.removeChild(Cloth);
+                    spawnCloth();
+                }
+            }
+            fall();
+        }
+
+        function checkCollision(Cloth) {
+            let basket = document.getElementById("Basket");
+            let basketLeft = parseFloat(basket.style.left);
+            let clothLeft = parseFloat(Cloth.style.left);
+
+            if (Math.abs(basketLeft - clothLeft) < 5) {
+                score += 1;
+                document.getElementById("score").innerText = score;
+            }
+        }
+
+        spawnCloth();
+    </script>
+</body>
+</html>
