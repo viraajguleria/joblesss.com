@@ -1,0 +1,369 @@
+<html>
+    <head>
+        <title>Share Market</title>
+        <style>
+            #Player1Board {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 5%;
+                top: 5%;
+                height: 60%;
+                width: 30%;
+            }
+
+            #TotalCoinsCollected1 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 5%;
+                height: 10%;
+                width: 80%;
+                font-size: 250%;
+            }
+
+            #Options1 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 25%;
+                height: 11%;
+                width: 81%;
+                font-size: 225%;    
+                border-radius: 0;
+            }
+
+            #OnVictory1 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 45%;
+                height: 10%;
+                width: 80%;
+                font-size: 100%;    
+                border-radius: 0; 
+            }
+
+            #OnDefeat1 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 65%;
+                height: 10%;
+                width: 80%;
+                font-size: 100%;    
+                border-radius: 0; 
+            }
+
+            #ResultBoard {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 40%;
+                top: 5%;
+                height: 60%;
+                width: 20%;
+            }
+
+            #Results {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 5%;
+                height: 50%;
+                width: 80%;
+                font-size: 500%;    
+                border-radius: 0;    
+            }
+
+            #ResultButton {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 65%;
+                height: 10%;
+                width: 80%;
+                font-size: 100%;    
+                border-radius: 0; 
+                background-color: white;
+            }
+
+            #ResultButton:hover {
+                background-color: whitesmoke;
+            }
+
+            #Player2Board {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 65%;
+                top: 5%;
+                height: 60%;
+                width: 30%;
+            }
+
+            #TotalCoinsCollected2 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 5%;
+                height: 10%;
+                width: 80%;
+                font-size: 250%;
+            }
+
+            #Options2 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 25%;
+                height: 11%;
+                width: 81%;
+                font-size: 225%;    
+                border-radius: 0;
+            }
+
+            #OnVictory2 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 45%;
+                height: 10%;
+                width: 80%;
+                font-size: 100%;    
+                border-radius: 0; 
+            }
+
+            #OnDefeat2 {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 10%;
+                top: 65%;
+                height: 10%;
+                width: 80%;
+                font-size: 100%;    
+                border-radius: 0; 
+            }
+
+            #FeedBackInput {
+                border: 2.5px solid black;
+                position: absolute;
+                left: 5%;
+                top: 80%;
+                height: 10%;
+                width: 90%;
+                font-size: 100%;    
+                border-radius: 0; 
+                font-size: 250%;
+            }
+        </style>
+    </head>
+    <body id="MainPage">
+        <center>
+            <div id="Player1Board">
+                <div id="TotalCoinsCollected1">Total Coins Collected : 00</div>
+                <select id="Options1">
+                    <option value="ChooseOption">Choose Tails or Heads :-</option>
+                    <option value="Heads">Heads</option>
+                    <option value="Tails">Tails</option>
+                </select>
+                <input id="OnVictory1" placeholder="Enter Total Coins Added To Bank On Victory :-" type="number">
+                <input id="OnDefeat1" placeholder="Enter Total Coins Subtracted From Bank On Defeat :-" type="number">
+            </div>
+            <div id="ResultBoard">
+                <div id="Results"></div>
+                <button onclick="SubmitAndDisplayResults()" id="ResultButton">Submit :-</button>
+            </div>
+            <div id="Player2Board">
+                <div id="TotalCoinsCollected2">Total Coins Collected : 00</div>
+                <select id="Options2">
+                    <option value="ChooseOption">Choose Tails or Heads :-</option>
+                    <option value="Heads">Heads</option>
+                    <option value="Tails">Tails</option>
+                </select>
+                <input id="OnVictory2" placeholder="Enter Total Coins Added To Bank on Victory :-" type="Number">
+                <input id="OnDefeat2" placeholder="Enter Total Coins Subtracted From Bank on Defeat :-" type="Number">
+            </div>
+            <input id="FeedbackInput" placeholder="Give Feedback feedback and click refresh button :-" type="text">
+        </center>
+        <script>
+            let totalCoins1 = 0;
+            let totalCoins2 = 0;
+            let TotalMoves = 0;
+
+            function SubmitAndDisplayResults() {
+
+                var RandomNumber = Math.floor(Math.random() * 2);
+                var Options1 = document.getElementById("Options1").value;
+                var Options2 = document.getElementById("Options2").value;
+
+                var OnVictory1 = parseInt(document.getElementById("OnVictory1").value) || 0;
+                var OnVictory2 = parseInt(document.getElementById("OnVictory2").value) || 0;
+                var OnDefeat1 = parseInt(document.getElementById("OnDefeat1").value) || 0;
+                var OnDefeat2 = parseInt(document.getElementById("OnDefeat2").value) || 0;
+
+                var Results = document.getElementById("Results");
+                let resultText = RandomNumber === 0 ? "Tails" : "Heads";
+                Results.innerHTML = resultText;
+
+                if (Options1 === resultText) {
+                    totalCoins1 += OnVictory1;
+                } else {
+                    totalCoins1 -= OnDefeat1;
+                }
+
+                if (Options2 === resultText) {
+                    totalCoins2 += OnVictory2;
+                } else {
+                    totalCoins2 -= OnDefeat2;
+                }
+
+                document.getElementById("TotalCoinsCollected1").innerHTML = `Total Coins Collected : ${totalCoins1}`;
+                document.getElementById("TotalCoinsCollected2").innerHTML = `Total Coins Collected : ${totalCoins2}`;
+
+                if (Options1 === resultText && Options2 === resultText) {
+                    const WhiteBackground = document.createElement('div');
+                    WhiteBackground.style.position = "absolute"; 
+                    WhiteBackground.style.left = 0; 
+                    WhiteBackground.style.top = 0; 
+                    WhiteBackground.style.height = "100%"; 
+                    WhiteBackground.style.width = "100%"; 
+                    WhiteBackground.style.backgroundColor = "rgba(255,255,255,0.8)"; 
+                    WhiteBackground.style.display = "flex";
+                    WhiteBackground.style.justifyContent = "center";
+                    WhiteBackground.style.alignItems = "center";
+
+                    const Alert1 = document.createElement('div');
+                    Alert1.style.width = "50%";
+                    Alert1.style.height = "50%";
+                    Alert1.style.border = "2.5px solid black";
+                    Alert1.style.borderRadius = "10px";
+                    Alert1.style.backgroundColor = "white";
+                    Alert1.style.textAlign = "center";
+                    Alert1.style.padding = "20px";
+                    Alert1.style.fontSize = "150%";
+                    Alert1.style.position = "absolute";
+                    Alert1.style.left = "25%";
+                    Alert1.style.top = "25%";
+
+                    Alert1.innerHTML = `<div style="font-size: 250%; margin-bottom: 10px;">🎉 Congrats Player1 and Player2! 🎉</div>
+                                        <div>You both chose "${resultText}" and won!</div>`;
+
+                    WhiteBackground.appendChild(Alert1);
+                    document.body.appendChild(WhiteBackground);
+
+                    setTimeout(() => {
+                        document.body.removeChild(WhiteBackground);
+                    }, 3000);
+                }
+
+                else if (Options1 !== resultText && Options2 !== resultText) {
+                    const WhiteBackground2 = document.createElement('div');
+                    WhiteBackground2.style.position = "absolute"; 
+                    WhiteBackground2.style.left = 0; 
+                    WhiteBackground2.style.top = 0; 
+                    WhiteBackground2.style.height = "100%"; 
+                    WhiteBackground2.style.width = "100%"; 
+                    WhiteBackground2.style.backgroundColor = "rgba(255,255,255,0.8)"; 
+                    WhiteBackground2.style.display = "flex";
+                    WhiteBackground2.style.justifyContent = "center";
+                    WhiteBackground2.style.alignItems = "center";
+
+                    const Alert2 = document.createElement('div');
+                    Alert2.style.width = "50%";
+                    Alert2.style.height = "50%";
+                    Alert2.style.border = "2.5px solid black";
+                    Alert2.style.borderRadius = "10px";
+                    Alert2.style.backgroundColor = "white";
+                    Alert2.style.textAlign = "center";
+                    Alert2.style.padding = "20px";
+                    Alert2.style.fontSize = "150%";
+                    Alert2.style.position = "absolute";
+                    Alert2.style.left = "25%";
+                    Alert2.style.top = "25%";
+                    Alert2.innerHTML = `<div style="font-size: 250%; margin-bottom: 10px;">😿 Shame on Both of you 😿</div>
+                                        <div>You both chose "${resultText}" and got defeated!</div>`;
+
+                    WhiteBackground2.appendChild(Alert2);
+                    document.body.appendChild(WhiteBackground2);
+
+                    setTimeout(() => {
+                        document.body.removeChild(WhiteBackground2);
+                    }, 3000);
+                }
+
+                if (Options1 === resultText && Options2 !== resultText) {
+                    const WhiteBackground3 = document.createElement('div');
+                    WhiteBackground3.style.position = "absolute"; 
+                    WhiteBackground3.style.left = 0; 
+                    WhiteBackground3.style.top = 0; 
+                    WhiteBackground3.style.height = "100%"; 
+                    WhiteBackground3.style.width = "100%"; 
+                    WhiteBackground3.style.backgroundColor = "rgba(255,255,255,0.8)"; 
+                    WhiteBackground3.style.display = "flex";
+                    WhiteBackground3.style.justifyContent = "center";
+                    WhiteBackground3.style.alignItems = "center";
+
+                    const Alert3 = document.createElement('div');
+                    Alert3.style.width = "50%";
+                    Alert3.style.height = "50%";
+                    Alert3.style.border = "2.5px solid black";
+                    Alert3.style.borderRadius = "10px";
+                    Alert3.style.backgroundColor = "white";
+                    Alert3.style.textAlign = "center";
+                    Alert3.style.padding = "20px";
+                    Alert3.style.fontSize = "150%";
+                    Alert3.style.position = "absolute";
+                    Alert3.style.left = "25%";
+                    Alert3.style.top = "25%";
+
+                    Alert3.innerHTML = `<div style="font-size: 150%; margin-bottom: 10px;">🎉 Congrats Player 1 and Shame on you Player2 😿</div>
+                                        <div>Player1 you chose "${resultText}" and won! <br> But Player2 you chose "${Options2}" and got defeated!</div>`;
+
+                    WhiteBackground3.appendChild(Alert3);
+                    document.body.appendChild(WhiteBackground3);
+
+                    setTimeout(() => {
+                        document.body.removeChild(WhiteBackground3);
+                    }, 3000);
+                }
+
+                if (Options1 !== resultText && Options2 === resultText) {
+                    const WhiteBackground4 = document.createElement('div');
+                    WhiteBackground4.style.position = "absolute"; 
+                    WhiteBackground4.style.left = 0; 
+                    WhiteBackground4.style.top = 0; 
+                    WhiteBackground4.style.height = "100%"; 
+                    WhiteBackground4.style.width = "100%"; 
+                    WhiteBackground4.style.backgroundColor = "rgba(255,255,255,0.8)"; 
+                    WhiteBackground4.style.display = "flex";
+                    WhiteBackground4.style.justifyContent = "center";
+                    WhiteBackground4.style.alignItems = "center";
+
+                    const Alert4 = document.createElement('div');
+                    Alert4.style.width = "50%";
+                    Alert4.style.height = "50%";
+                    Alert4.style.border = "2.5px solid black";
+                    Alert4.style.borderRadius = "10px";
+                    Alert4.style.backgroundColor = "white";
+                    Alert4.style.textAlign = "center";
+                    Alert4.style.padding = "20px";
+                    Alert4.style.fontSize = "150%";
+                    Alert4.style.position = "absolute";
+                    Alert4.style.left = "25%";
+                    Alert4.style.top = "25%";
+
+                    Alert4.innerHTML = `<div style="font-size: 150%; margin-bottom: 10px;">🎉 Congrats Player2 and Shame on you Player1 😿</div>
+                                        <div>Player2 you chose "${resultText}" and won! <br> But Player1 you chose "${Options1}" and got defeated!</div>`;
+
+                    WhiteBackground4.appendChild(Alert4);
+                    document.body.appendChild(WhiteBackground4);
+
+                    setTimeout(() => {
+                        document.body.removeChild(WhiteBackground4);
+                    }, 3000);
+                }
+            }
+
+
+
+        </script>
+    </body>
+</html>
