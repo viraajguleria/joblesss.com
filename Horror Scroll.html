@@ -1,0 +1,246 @@
+<html>
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
+
+            @keyframes bloodDrip {
+                0% { text-shadow: 0 0 5px red; }
+                50% { text-shadow: 0 0 10px crimson, 0 0 15px darkred; }
+                100% { text-shadow: 0 0 5px red; }
+            }
+
+            h1 {
+                animation: bloodDrip 0.5s infinite alternate;
+                font-family: 'Nosifer', cursive;
+                color: red;
+            }
+
+            body {
+                background: linear-gradient(to bottom, aqua, aquamarine, lightblue, blue, darkblue, black);
+                height: 1000%;
+            }
+
+            #WaterMan {
+                position: absolute;
+            }
+
+            #SuspiciousFishes {
+                margin-top: 90vh;
+            }
+
+            #ScaryStars {
+                margin-top: 90vh;
+                margin-right: 0;
+            }
+
+            .TS {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+            }
+
+            #TS1 {
+                position: absolute;
+                top: 350%;
+                left: 10%;
+            }
+
+            #TS2 {
+                position: absolute;
+                top: 360%;
+                left: 25%;
+            }
+            
+            #TS3 {
+                position: absolute;
+                top: 355%;
+                left: 35%;
+            }
+            
+            #TS4 {
+                position: absolute;
+                top: 365%;
+                left: 45%;
+            }
+            
+            #TS5 {
+                position: absolute;
+                top: 335%;
+                left: 60%;
+            }
+            
+            #TS6 {
+                position: absolute;
+                top: 349%;
+                left: 49%;
+            }
+            
+            #TS7 {
+                position: absolute;
+                top: 358%;
+                left: 88%;
+            }
+            
+            #TS8 {
+                position: absolute;
+                top: 360%;
+                left: 74%;
+            }
+            
+            #TS9 {
+                position: absolute;
+                top: 350%;
+                left: 101%;
+            }
+            
+            #TS10 {
+                position: absolute;
+                top: 362%;
+                left: 3%;
+            }
+
+            #Title {
+                animation: bloodDrip 0.5s infinite alternate;
+                font-family: 'Nosifer', cursive;
+                color: red;
+                position: absolute;
+                left: 38%;
+                top: 5%;
+            } 
+
+            #RefreshButton {
+                position: absolute;
+                left: 25%;
+                top: 45%;
+                width: 50%;
+                height: 10%;
+                animation: bloodDrip 0.5s infinite alternate;
+                font-family: 'Nosifer', cursive;
+                color: red;
+            }
+        </style>
+    </head>
+    <body id="container">
+        <center>
+            <h1 id="Title">Haunted Scroll</h1>
+
+            <img id="WaterMan" src="49. A. Water Man.png">
+            <marquee direction="right" scrollAmount="50">
+                <img src="49. B. Horror Fishes.png" id="SuspiciousFishes">
+            </marquee>
+            <img src="49. C. Horror Star Fishes.png" id="ScaryStars">
+            <img src="49. D. Toxic Sensor.png" id="TS1" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS2" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS3" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS4" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS5" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS6" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS7" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS8" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS9" class="TS">
+            <img src="49. D. Toxic Sensor.png" id="TS10" class="TS">
+
+        </center>
+        <script>
+            let IsSensed = false;
+            const TS1 = document.getElementById('TS1');
+            const TS2 = document.getElementById('TS2');
+            const TS3 = document.getElementById('TS3');
+            const TS4 = document.getElementById('TS4');
+            const TS5 = document.getElementById('TS5');
+            const TS6 = document.getElementById('TS6');
+            const TS7 = document.getElementById('TS7');
+            const TS8 = document.getElementById('TS8');
+            const TS9 = document.getElementById('TS9');
+            const TS10 = document.getElementById('TS10');
+
+            document.getElementById("container").addEventListener("mousemove", function(event) {
+                let x = event.pageX;
+                let y = event.pageY;
+
+
+                document.getElementById("WaterMan").style.position = "absolute";
+                document.getElementById("WaterMan").style.left = x + "px";
+                document.getElementById("WaterMan").style.top = y + "px ";
+            });
+
+            TS1.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS2.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS3.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS4.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS5.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS6.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS7.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS8.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS9.addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            TS10 .addEventListener('mouseenter', () => {
+                IsSensed = true;
+                checkHover(); 
+            });
+
+            function checkHover() {
+                if (IsSensed) {
+                    const alert = document.createElement("div");
+                    alert.style.position = "absolute";
+                    alert.style.width = "50%";
+                    alert.style.height = "50%";
+                    alert.style.left = "25%";
+                    alert.style.top = "300%";
+                    alert.style.borderRadius = "2%";
+                    alert.style.border = "2.5px solid black";
+                    alert.style.background = "white";
+                    document.body.style.background = "black";
+                    
+                    const title = document.createElement("h2");
+                    title.id = "Title";
+                    title.innerText = "You lost 😭";
+                    
+                    const refresher = document.createElement("button");
+                    refresher.id = "RefreshButton";
+                    refresher.innerText = "Click refresh button";
+                    
+
+                    document.body.appendChild(alert);
+                    alert.appendChild(title);
+                    alert.appendChild(refresher);
+                }
+            }
+        </script>
+    </body>                                           
+</html>
