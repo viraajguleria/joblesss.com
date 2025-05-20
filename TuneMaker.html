@@ -1,0 +1,169 @@
+<html>
+<head>
+  <title>Custom Tune Composer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    h1 {
+        color: white;
+        font-family: 'Press Start 2P', cursive;
+    }
+    
+    #label {
+        border: 1px solid white;
+        width: 40%;
+        height: 10%;
+        color: white;
+        background-color: black;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    #duration {
+        border: 1px solid white;
+        width: 40%;
+        height: 10%;
+        color: white;
+        background-color: black;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    #waveform {
+        border: 1px solid white;
+        width: 40%;
+        height: 10%;
+        color: white;
+        background-color: black;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    #b1 {
+        border: 1px solid white;
+        width: 19.99%;
+        height: 10%;
+        color: white;
+        background-color: black;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    #b2 {
+        border: 1px solid white;
+        width: 19.7%;
+        height: 10%;
+        color: white;
+        background-color: black;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    table {
+        border: 1px solid white;
+        width: 40%;
+        font-family: 'Press Start 2P', cursive;
+        color: white;
+        background-color: black;
+    }
+
+    th {
+        border: 1px solid white;
+    }
+
+    td {
+        border: 1px solid white;
+    }
+
+    tr {
+        border: 1px solid white;
+        height: 50px;
+    }
+
+    body {
+        background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <center>  
+  <h1>Build Your Own Tune</h1>
+
+  <div id="l1">
+    <input type="text" id="label" placeholder="Type Hazards :-">
+  </div>
+  <br>
+    <input type="number" id="duration" min="0.1" step="0.1" value="1">
+  <br>
+  <br>
+
+    <select id="waveform">
+      <option value="sine">sine</option>
+      <option value="square">square</option>
+      <option value="triangle">triangle</option>
+      <option value="sawtooth">sawtooth</option>
+    </select>
+    <br>
+    <br>
+  <button id="b1" onclick="addTone()">Add</button>
+  <button id="b2" onclick="playTune()">Play Tune</button>
+    <br>
+    <br>
+  <table id="toneTable">    
+      <tr>
+        <th>Label</th>
+        <th>Duration</th>
+        <th>Waveform</th>
+        <th>Frequency</th>
+      </tr>
+  </table>
+  </center>
+  <script>
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+
+    const tones = [];
+
+    function addTone() {
+      const label = document.getElementById("label").value.trim();
+      const duration = parseFloat(document.getElementById("duration").value);
+      const waveform = document.getElementById("waveform").value;
+
+      if (!label || isNaN(duration) || duration <= 0) {
+        alert("Please enter valid inputs.");
+        return;
+      }
+
+      const frequency = Math.floor(Math.random() * 500) + 200;
+
+      tones.push({ label, duration, waveform, frequency });
+
+      const tableBody = document.querySelector("#toneTable tbody");
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${label}</td><td>${duration}</td><td>${waveform}</td><td>${frequency}</td>`;
+      tableBody.appendChild(row);
+
+      document.getElementById("label").value = "";
+    }
+
+    function playTone(frequency, duration, type, startTime) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(frequency, startTime);
+
+      gain.gain.setValueAtTime(0.6, startTime);
+      gain.gain.linearRampToValueAtTime(0.0, startTime + duration); 
+
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    }
+
+    function playTune() {
+      let time = audioCtx.currentTime;
+
+      for (const tone of tones)     {
+        playTone(tone.frequency, tone.duration, tone.waveform, time);
+        time += tone.duration;
+      }
+    }
+  </script>
+
+</body>
+</html>
