@@ -4,7 +4,7 @@
     body {
       margin: 0;
       background: black;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     canvas {
       display: block;
@@ -37,6 +37,16 @@
       width: 100%;
       height: 5%;
     }
+
+    
+    #SSB {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      border: 1px solid transparent;
+      width: 101%;
+      height: 5%;
+    }
   </style>
 </head>
 <body>
@@ -44,18 +54,43 @@
   <input placeholder="Type color :-" oninput="changeColor()" id="Color" type="text">
   <input placeholder="Type text :-" oninput="changeText()" id="lT" type="text">
   <input placeholder="Type speed :-" oninput="changeSpeed()" id="SC" type="text">
+  <button onclick="SSB()" id="SSB">Start/Stop</button>
 
   <script>
 
     let letters = "";
    let drawer = 100; // default speed in ms
   let intervalId;
+  let TBC = 0;
+  let lastChar = '';
 
     function changeText() {
       var lT = document.getElementById("lT").value;
 
       letters = lT;
     }
+    let isDeleted = false;
+
+    function SSB() {
+      const colorInput = document.getElementById('Color');
+
+      if (!isDeleted && colorInput.value.length > 0) {
+        // Delete last character and store it
+        lastChar = colorInput.value.slice(-1);
+        colorInput.value = colorInput.value.slice(0, -1);
+        isDeleted = true;
+      } else if (isDeleted) {
+        // Restore last deleted character
+        colorInput.value += lastChar;
+        lastChar = '';
+        isDeleted = false;
+      }
+
+      // Optional: Update color immediately
+      changeColor();
+    }
+
+    
 
 
     const canvas = document.getElementById("matrixCanvas");
