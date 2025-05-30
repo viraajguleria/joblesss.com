@@ -1,0 +1,179 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow-x: hidden;
+    }
+    canvas {
+      display: block;
+      height: 100%;
+    }
+
+    #Color, #lT, #SC, #ASCII, #SSB {
+      position: absolute;
+      left: 0;
+      border: 1px solid transparent;
+      width: 100%;
+      height: 5%;
+    }
+
+    #SC { top: 110%; }
+    #Color { top: 115%; }
+    #lT { top: 120%; }
+    #ASCII { top: 125%; }
+    #SSB { top: 130%; }
+
+    #SearchInput {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        border: 1.5px solid black;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    #Link {
+        position: absolute;
+        left: 10%;
+        top: 20%;
+        width: 80%;
+        height: 10%;
+    }
+
+    #LinkGenerator {
+        position: absolute;
+        left: 10%;
+        top: 40%;
+        width: 80%;
+        height: 10%;
+    }
+
+    #LinkHREF {
+        position: absolute;
+        left: 10%;
+        top: 80%;
+        width: 80%;
+        height: 10%;
+        border: 0.1px solid black;
+        border-radius: 1.9px;
+        background-color: white;
+        color: grey;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+  <div id="SearchInput">
+    <input placeholder="Search here to get a link :-" id="Link" type="text">
+    <button id="LinkGenerator" onclick="generateLink()">Generate Link</button>
+    <button id="LinkHREF">Your link will come here :-</button>
+  </div>
+
+  <input placeholder="Type speed :-" oninput="changeSpeed()" id="SC" type="text" />
+  <input placeholder="Type color :-" oninput="changeColor()" id="Color" type="text" />
+  <input placeholder="Type text :-" oninput="changeText()" id="lT" type="text" />
+  <input placeholder="Type ASCII code if any :-" id="ASCII" type="text" oninput="asciiToChar()" />
+  <button onclick="SSB()" id="SSB">Start/Stop</button>
+
+  <script>
+    let letters = "abc123~|[]";
+    let drawer = 33;
+    let intervalId;
+    let lastChar = '';
+    let isDeleted = false;
+
+    function changeText() {
+      const lT = document.getElementById("lT").value;
+      letters = lT;
+    }
+
+    function asciiToChar() {
+      const asciiInput = document.getElementById("ASCII").value.trim();
+      const code = parseInt(asciiInput);
+      if (!isNaN(code) && code >= 0 && code <= 255) {
+        letters = String.fromCharCode(code);
+      } else if (asciiInput === "") {
+        letters = "";
+      } else {
+        letters = "";
+      }
+    }
+
+    function SSB() {
+      const colorInput = document.getElementById('Color');
+      if (!isDeleted && colorInput.value.length > 0) {
+        lastChar = colorInput.value.slice(-1);
+        colorInput.value = colorInput.value.slice(0, -1);
+        isDeleted = true;
+      } else if (isDeleted) {
+        colorInput.value += lastChar;
+        lastChar = '';
+        isDeleted = false;
+      }
+      changeColor();
+    }
+
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      var Color = document.getElementById("Color").value;
+      ctx.fillStyle = Color || "#0F0";
+      ctx.font = fontSize + "px 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length)) || '*';
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    function changeSpeed() {
+      let SC = parseInt(document.getElementById("SC").value);
+      if (!isNaN(SC) && SC > 0) {
+        clearInterval(intervalId);
+        drawer = SC;
+        intervalId = setInterval(draw, drawer);
+      }
+    }
+
+    function changeColor() {
+      var Color = document.getElementById("Color").value;
+      document.getElementById("Color").style.background = Color;
+    }
+
+    intervalId = setInterval(draw, drawer);
+
+    function generateLink() {
+      const query = document.getElementById("Link").value.trim();
+      if (query) {
+        const encodedQuery = encodeURIComponent(query);
+        const url = `https://www.google.com/search?q=${encodedQuery}`;
+        document.getElementById("LinkHREF").innerHTML = `
+          <a href="${url}" target="_blank">Search "${query}" on Google</a>
+        `;
+      } else {
+        document.getElementById("LinkHREF").textContent = "Please enter a search term.";
+      }
+    }
+  </script>
+</body>
+</html>
