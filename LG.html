@@ -1,6 +1,6 @@
 <html>
 <head>
-  <meta charset="UTF-8">
+  <title>Google Search 🖥💻</title>
   <style>
     body {
       margin: 0;
@@ -26,9 +26,20 @@
     #ASCII { top: 125%; }
     #SSB { top: 130%; }
 
+    #ShortCutKeys {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        width: 50%;
+        height: 25%;
+        border: 1.5px solid black;
+        background-color: white;
+        border-radius: 10px;
+    }
+
     #SearchInput {
         position: absolute;
-        top: 25%;
+        top: 45%;
         left: 25%;
         width: 50%;
         height: 50%;
@@ -57,21 +68,38 @@
         position: absolute;
         left: 10%;
         top: 80%;
-        width: 80%;
+        width: 69.6%;
         height: 10%;
         border: 0.1px solid black;
         border-radius: 1.9px;
         background-color: white;
         color: grey;
     }
+
+    #LikeButton {
+        position: absolute;
+        left: 80%;
+        top: 80%;
+        width: 10%;
+        height: 10%;
+    } 
   </style>
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
+  <div id="ShortCutKeys">
+    <center>
+      <h1>⌨ Short Cut Keys ⌨</h1>
+      <p>Alt + g for Generate Link</p>
+      <p>Alt + r to Refresh Page</p>
+      <p>Alt + l for 👍🏻</p>
+    </center>
+  </div>
   <div id="SearchInput">
     <input placeholder="Search here to get a link :-" id="Link" type="text">
     <button id="LinkGenerator" onclick="generateLink()">Generate Link</button>
     <button id="LinkHREF">Your link will come here :-</button>
+    <button id="LikeButton" onclick="createAlert()">👍🏻</button>
   </div>
 
   <input placeholder="Type speed :-" oninput="changeSpeed()" id="SC" type="text" />
@@ -81,6 +109,7 @@
   <button onclick="SSB()" id="SSB">Start/Stop</button>
 
   <script>
+    let goodCount = 0;
     let letters = "abc123~|[]";
     let drawer = 33;
     let intervalId;
@@ -163,17 +192,44 @@
     intervalId = setInterval(draw, drawer);
 
     function generateLink() {
-      const query = document.getElementById("Link").value.trim();
-      if (query) {
+    const query = document.getElementById("Link").value.trim();
+    if (query) {
         const encodedQuery = encodeURIComponent(query);
-        const url = `https://www.google.com/search?q=${encodedQuery}`;
+        const url = `https://www.google.com/search?q=${encodedQuery}&authuser=1`;
         document.getElementById("LinkHREF").innerHTML = `
-          <a href="${url}" target="_blank">Search "${query}" on Google</a>
+        <a href="${url}" target="_blank">${query}</a>
         `;
-      } else {
+    } else {
         document.getElementById("LinkHREF").textContent = "Please enter a search term.";
-      }
     }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.altKey && event.key.toLowerCase() === 'g') {
+        generateLink(); 
+      } 
+
+      else if (event.altKey && event.key.toLowerCase() === 'r') {
+        window.location.reload();
+      }
+
+      if (event.altKey && event.key.toLowerCase() === 'l') {
+        createAlert();
+      }
+    });
+
+    function createAlert() {
+      goodCount += 1; 
+
+      if (goodCount == 1) {
+        prompt("Please give a feedback and give some improvement ideas :-");
+        alert('Thank you for your feedback 😊 !')
+      }
+
+      else {
+        alert('You already supported us !')
+      }
+    } 
   </script>
 </body>
 </html>
