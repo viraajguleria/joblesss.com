@@ -222,12 +222,173 @@
       goodCount += 1; 
 
       if (goodCount == 1) {
-        prompt("Please give a feedback and give some improvement ideas :-");
-        alert('Thank you for your feedback 😊 !')
+        const alertBox = document.createElement("div");
+        alertBox.innerHTML = `
+          <style>
+            #FeedBack {
+              position: absolute;
+              left: 25%;
+              top: 5%;
+              width: 50%;
+              height: 10%;
+              text-align: center;
+            }  
+
+            #Like {
+              position: absolute;
+              left: 25%;
+              top: 20%;
+              width: 50%;
+              height: 10%;
+              text-align: left;
+              border: 1.5px solid black;
+              background: white;
+            }  
+
+            #LikeCheck {
+              position: absolute;
+              left: 73.3%;
+              top: 21.5%;
+              width: 20px;
+              height: 20px;
+              border: 1.5px solid black;
+              background: white;
+            }  
+
+            #UnLike {
+              position: absolute;
+              left: 25%;
+              top: 35%;
+              width: 50%;
+              height: 10%;
+              text-align: left;
+              border: 1.5px solid black;
+              background: white;
+            } 
+
+            #UnLikeCheck {
+              position: absolute;
+              left: 73.3%;
+              top: 36.5%;
+              width: 20px;
+              height: 20px;
+              text-align: left;
+              border: 1.5px solid black;
+              background: white;
+            } 
+
+          </style>
+          <input id="Feedback" placeholder="Type a feedback :-"></>
+          <br>
+          <br>
+          <button id="Like">Did you like it ?</button>
+          <br>
+          <input id="LikeCheck" type="checkbox">
+          <br>
+          <br>
+          <button id="UnLike">Did you unlike it ?</button>
+          <br>
+          <input id="UnLikeCheck" type="checkbox">
+        `;
+        alertBox.style.zIndex = "9999";
+        alertBox.style.position = "fixed";
+        alertBox.style.top = "-50%";
+        alertBox.style.left = "0";
+        alertBox.style.transform = "translateX(50%)";
+        alertBox.style.backgroundColor = "#f0f0f0";
+        alertBox.style.border = "1px solid #999";
+        alertBox.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+        alertBox.style.zIndex = "9999";
+        alertBox.style.width = "50%";
+        alertBox.style.height = "50%";
+        alertBox.style.textAlign = "center";
+        alertBox.style.borderRadius= "5px";
+        alertBox.style.transition = "top 5s ease";
+        document.body.appendChild(alertBox);
+
+        var LikeButton = document.getElementById("LikeButton");
+
+        document.getElementById("LikeButton").disabled = true;
+
+        setTimeout(() => {
+          alertBox.style.top = "45%";
+        }, 1000);
+
+        setTimeout(() => {
+          alertBox.style.transition = "width 5s ease, height 5s ease, left 5s ease, top 5s ease"; 
+        }, 25000);
+
+        setTimeout(() => {
+          alertBox.style.height = "0"; 
+          alertBox.style.width = "0"; 
+          alertBox.style.left = "50%"; 
+          alertBox.style.top = "50%"; 
+          alertBox.innerHTML = "";
+        }, 26000);
+
+        setTimeout (() => {
+          alertBox.remove();
+          document.getElementById("LikeButton").disabled = false;
+        }, 32000);
       }
 
       else {
-        alert('You already supported us !')
+        const alertBox2 = document.createElement("div");
+        alertBox2.innerHTML = `
+          <style>
+            #Text {
+              position: absolute;
+              left: 25%;
+              top: 25%;
+              width: 50%;
+              height: 50%;
+              border: 1px solid transparent;
+            }  
+          </style>
+          <button id="Text">
+            <h1>
+              You Have already given us feedback
+            </h1>
+          </button>
+        `;
+        alertBox2.style.zIndex = "9999";
+        alertBox2.style.position = "fixed";
+        alertBox2.style.top = "-50%";
+        alertBox2.style.left = "0";
+        alertBox2.style.transform = "translateX(50%)";
+        alertBox2.style.backgroundColor = "#f0f0f0";
+        alertBox2.style.border = "1px solid #999";
+        alertBox2.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+        alertBox2.style.zIndex = "9999";
+        alertBox2.style.width = "50%";
+        alertBox2.style.height = "50%";
+        alertBox2.style.textAlign = "center";
+        alertBox2.style.borderRadius= "5px";
+        alertBox2.style.transition = "top 5s ease";
+      document.getElementById("LikeButton").disabled = true;
+
+        document.body.appendChild(alertBox2);
+ 
+        setTimeout(() => {
+          alertBox2.style.top = "45%";
+        }, 1000);
+
+        setTimeout(() => {
+          alertBox2.style.transition = "width 5s ease, height 5s ease, left 5s ease, top 5s ease"; 
+        }, 5000);
+
+        setTimeout(() => {
+          alertBox2.style.height = "0"; 
+          alertBox2.style.width = "0"; 
+          alertBox2.style.left = "50%"; 
+          alertBox2.style.top = "50%"; 
+          alertBox2.innerHTML = "";
+        }, 6000);
+
+        setTimeout (() => {
+          alertBox2.remove();
+          document.getElementById("LikeButton").disabled = false;
+        }, 11000);
       }
     } 
   </script>
