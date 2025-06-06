@@ -1,0 +1,339 @@
+<!DOCTYPE html>  <!-- I will use doctype now -->
+<html>
+<head>
+    <title>Code Runner Like VS Code</title>
+    <link rel="icon" href="0. Common Logo.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        #ViraajCNO {
+            position: absolute;
+            left: 1%;
+            top: 1%;
+            height: 98%;
+            width: 98%;
+            border: 2.5px solid black;
+            display: flex;
+        }
+
+        #ViraajBNR {
+            width: 20%;
+            border-right: 2px solid black;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;            
+            padding-top: 5%;
+        }
+
+        #ViraajBNR button {
+            width: 80%;
+            height: 10%;
+            font-size: 150%;
+            margin: 10px 0;
+        }
+
+        #ViraajBNR input {
+            width: 79%;
+            height: 10%;
+            font-size: 150%;
+            margin: 10px 0;
+            cursor: pointer;
+            cursor: crosshair;
+        }
+
+        #ViraajBNR div {
+            position: absolute;
+            left: 15.5%;
+            top: 13.8%;
+            cursor: pointer;
+        } 
+
+        #CNOArea {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        #ViraajCode {
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            padding: 10px;
+            font-family: monospace;
+            box-sizing: border-box;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="ViraajCNO">
+        <div id="ViraajBNR">
+            <input type="text" id="ViraajFileName" placeholder="Enter file name">
+            <button id="ViraajSaveFile" onclick="saveFile()">Save</button>
+            <button id="ViraajOpen">
+                Open File
+                <input type="file" id="ViraajOpenButton">
+            </button>
+        </div>
+        <div id="CNOArea">
+            <textarea id="ViraajCode" placeholder="Write HTML/CSS/JS code here..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        let buttonClicked = 0;
+        let color = 0;
+
+        document.getElementById('ViraajOpenButton').addEventListener('change', function () {
+            const fileOpened = this.files[0];
+            if (fileOpened) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById('ViraajCode').value = e.target.result;
+                };
+
+                reader.readAsText(fileOpened);
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.altKey && event.key.toLowerCase() === 'e') {
+                buttonClicked += 1;
+
+                if (buttonClicked % 2 !== 0) {
+                    document.getElementById("CNOArea").style.width = "100%";
+                    document.getElementById("ViraajBNR").style.display = "none";
+                }
+
+                if (buttonClicked % 2 === 0) {
+                    document.getElementById("CNOArea").style.width = "80%";
+                    document.getElementById("ViraajBNR").style.display = "flex";
+                }
+            }
+
+            if (event.altKey && event.key.toLowerCase() === 's') {
+                saveFile();     
+            }
+
+            if  (event.altKey && event.key.toLowerCase === 'o') {
+                document.getElementById('openButton').addEventListener('change', function () {
+                    const fileOpened = this.files[0];
+                    if (fileOpened) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            document.getElementById('ViraajCode').value = e.target.result;
+                        };
+
+                        reader.readAsText(fileOpened);
+                    }
+                });
+            }
+
+            if (event.altKey && event.key.toLowerCase() === 'd') {
+                color += 1;
+                if (color % 2 != 0) {
+                    document.body.style.background = "black";
+                    document.getElementById("ViraajCNO").style.border = "1.5px solid white";
+                    document.getElementById("ViraajCNO").style.borderLeft = "1.5px solid white";
+                    document.getElementById("ViraajCNO").style.borderRight = "1.5px solid white";
+                    document.getElementById("ViraajCNO").style.borderTop = "1.5px solid white";
+                    document.getElementById("ViraajCNO").style.borderBottom = "1.5px solid white";
+                    document.getElementById("ViraajCNO").style.background = "black";
+                    document.getElementById("ViraajBNR").style.border = "1.5px solid white";
+                    document.getElementById("ViraajBNR").style.background = "black";
+                    document.getElementById("CNOArea").style.border = "1.5px solid white";
+                    document.getElementById("CNOArea").style.background = "black";
+                    document.getElementById("ViraajFileName").style.border = "1.5px solid white";
+                    document.getElementById("ViraajFileName").style.background = "black";
+                    document.getElementById("ViraajFileName").style.color = "white";
+                    document.getElementById("ViraajSaveFile").style.background = "black";
+                    document.getElementById("ViraajSaveFile").style.border = "1.5px solid white";
+                    document.getElementById("ViraajSaveFile").style.color = "white";
+                    document.getElementById("ViraajCode").style.border = "1.5px solid white";
+                    document.getElementById("ViraajCode").style.color = "white";
+                    document.getElementById("ViraajCode").style.background = "black";
+                    document.getElementById("ViraajOpenButton").style.background = "black";
+                    document.getElementById("ViraajOpenButton").style.border = "1.5px solid white";
+                    document.getElementById("ViraajOpenButton").style.color = "white";
+                    document.getElementById("ViraajOpen").style.background = "black";
+                    document.getElementById("ViraajOpen").style.border = "1.5px solid white";
+                    document.getElementById("ViraajOpen").style.color = "white";
+                }
+
+                else if (color % 2 == 0) {
+                    document.body.style.background = "white";
+                    document.getElementById("ViraajCNO").style.border = "1.5px solid black";
+                    document.getElementById("ViraajCNO").style.borderLeft = "1.5px solid black";
+                    document.getElementById("ViraajCNO").style.borderRight = "1.5px solid black";
+                    document.getElementById("ViraajCNO").style.borderTop = "1.5px solid black";
+                    document.getElementById("ViraajCNO").style.borderBottom = "1.5px solid black";
+                    document.getElementById("ViraajCNO").style.background = "white";
+                    document.getElementById("ViraajBNR").style.border = "1.5px solid black";
+                    document.getElementById("ViraajBNR").style.background = "#f1f1f1";
+                    document.getElementById("CNOArea").style.border = "1.5px solid black";
+                    document.getElementById("CNOArea").style.background = "white";
+                    document.getElementById("ViraajFileName").style.border = "1.5px solid black";
+                    document.getElementById("ViraajFileName").style.background = "white";
+                    document.getElementById("ViraajFileName").style.color = "black";
+                    document.getElementById("ViraajSaveFile").style.background = "white";
+                    document.getElementById("ViraajSaveFile").style.border = "1.5px solid black";
+                    document.getElementById("ViraajSaveFile").style.color = "black";
+                    document.getElementById("ViraajCode").style.border = "1.5px solid black";
+                    document.getElementById("ViraajCode").style.color = "black";
+                    document.getElementById("ViraajCode").style.background = "white";
+                    document.getElementById("ViraajOpenButton").style.background = "white";
+                    document.getElementById("ViraajOpenButton").style.border = "1.5px solid black";
+                    document.getElementById("ViraajOpenButton").style.color = "black";
+                    document.getElementById("ViraajOpen").style.background = "white";
+                    document.getElementById("ViraajOpen").style.border = "1.5px solid black";
+                    document.getElementById("ViraajOpen").style.color = "black";
+                }
+            }
+        });
+
+
+        async function saveFile() {
+            const htmlContent = document.getElementById("ViraajCode").value;
+            let fileName = document.getElementById("ViraajFileName").value.trim();
+
+            if (!fileName) {
+                alert("Please enter a file name.");
+                return;
+            }
+
+            if (!fileName.endsWith(".html")) {
+                fileName += ".html";
+            }
+
+            try {
+                const fileHandle = await window.showSaveFilePicker({
+                    suggestedName: fileName,
+                    types: [{
+                        description: "HTML File",
+                        accept: { "text/html": [".html"] }
+                    }]
+                });
+
+                const writable = await fileHandle.createWritable();
+                await writable.write(htmlContent);
+                await writable.close();
+
+                        const alert0 = document.createElement("div");
+                        alert0.innerHTML = `
+                            <style>
+                                #emoji {
+                                    font-size: 500%;
+                                }    
+
+                                #text {
+                                    font-family: 'press Start 2P', cursive;
+                                }
+                            </style>
+                            <center>
+                                <h1 id="emoji">✔</h1>
+                                <h1 id="text">File saved successfully!</h1>    
+                            </center>
+                        `;
+                        alert0.style.width = "50%";
+                        alert0.style.height = "50%";
+                        alert0.style.position = "absolute";
+                        alert0.style.left = "-50%";
+                        alert0.style.top = "25%";
+                        alert0.style.transition = "left 2s ease, top 2s ease, width 2s, height 2s, rotate 2s";
+                        alert0.style.border = "1.5px solid black";
+                        alert0.style.borderRadius = "5px";
+                        alert0.style.background = "white";
+
+                        document.body.appendChild(alert0);
+
+                        setTimeout(() => {
+                            alert0.style.left = "25%";
+                        },1 );
+
+                        setTimeout(() => {
+                            alert0.style.left = "0";
+                            alert0.style.top = "0";
+                            alert0.style.width = "100%";
+                            alert0.style.height = "100%";
+                            alert0.style.rotate = "360deg";
+                        },3001);
+
+                        setTimeout(() => {
+                            alert0.style.left = "50%";
+                            alert0.style.top = "50%";
+                            alert0.style.width = "0";
+                            alert0.style.height = "0";
+                            alert0.style.rotate = "0deg";
+                            alert0.innerHTML = "";
+                        },6001);
+
+                        setTimeout(() => {
+                            alert0.remove();
+                        },9001);   
+
+            } catch (err) {
+                console.error("Save failed:", err);
+                const alert = document.createElement("div");
+          alert.innerHTML = `
+            <style>
+                #emoji {
+                    font-size: 500%;
+                }    
+
+                #text {
+                    font-family: 'press Start 2P', cursive;
+                }
+            </style>
+            <center>
+                <h1 id="emoji">❌</h1>
+                <h1 id="text">File saving failed</h1>    
+            </center>
+          `;
+          alert.style.width = "50%";
+          alert.style.height = "50%";
+          alert.style.position = "absolute";
+          alert.style.left = "-50%";
+          alert.style.top = "25%";
+          alert.style.transition = "left 2s ease, top 2s ease, width 2s, height 2s, rotate 2s";
+          alert.style.border = "1.5px solid black";
+          alert.style.borderRadius = "5px";
+          alert.style.background = "white";
+
+          document.body.appendChild(alert);
+
+          setTimeout(() => {
+            alert.style.left = "25%";
+          },1 );
+
+          setTimeout(() => {
+            alert.style.left = "0";
+            alert.style.top = "0";
+            alert.style.width = "100%";
+            alert.style.height = "100%";
+            alert.style.rotate = "360deg";
+          },3001);
+
+         setTimeout(() => {
+            alert.style.left = "50%";
+            alert.style.top = "50%";
+            alert.style.width = "0";
+            alert.style.height = "0";
+            alert.style.rotate = "0deg";
+            alert.innerHTML = "";
+          },6001);
+
+          setTimeout(() => {
+            alert.remove();
+          },9001);
+            }
+        }
+    </script>
+</body>
+</html>
