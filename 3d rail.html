@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { margin: 0; overflow: hidden; background: linear-gradient(#87ceeb, #e0f7fa); }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script>
+  // Scene, Camera, Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0x888888));
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+  dirLight.position.set(10, 20, 10);
+  scene.add(dirLight);
+
+  // Ground
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(6000, 1000),
+    new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  scene.add(ground);
+
+  // Railway Tracks
+  for (let i = -100; i < 1000; i += 1.5) {
+    const sleeper = new THREE.Mesh(
+      new THREE.BoxGeometry(1.2, 0.1, 2),
+      new THREE.MeshStandardMaterial({ color: 0x4d3319 })
+    );
+    sleeper.position.set(i, 0.05, 0);
+    scene.add(sleeper);
+  }
+
+  const leftRail = new THREE.Mesh(
+    new THREE.BoxGeometry(6000, 0.1, 0.2),
+    new THREE.MeshStandardMaterial({ color: 0x888888 })
+  );
+  leftRail.position.set(0, 0.1, -0.8);
+  scene.add(leftRail);
+
+  const rightRail = new THREE.Mesh(
+    new THREE.BoxGeometry(6000, 0.1, 0.2),
+    new THREE.MeshStandardMaterial({ color: 0x888888 })
+  );
+  rightRail.position.set(0, 0.1, 0.8);
+  scene.add(rightRail);
+
+  // Train
+  const train = new THREE.Group();
+
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(4, 2, 2),
+    new THREE.MeshStandardMaterial({ color: 0x0088ff })
+  );
+  body.position.y = 1;
+  train.add(body);
+
+  const chimney = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.3, 1),
+    new THREE.MeshStandardMaterial({ color: 0x222222 })
+  );
+  chimney.position.set(-1.5, 2, 0);
+  train.add(chimney);
+
+  // Wheels
+  for (let i = -1.5; i <= 1.5; i += 3) {
+    for (let z = -0.8; z <= 0.8; z += 1.6) {
+      const wheel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.5, 0.5, 0.3, 20),
+        new THREE.MeshStandardMaterial({ color: 0x111111 })
+      );
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(i, 0.5, z);
+      train.add(wheel);
+    }
+  }
+
+  scene.add(train);
+
+  // Smoke
+  const smokeParticles = [];
+  function createSmoke(x, y, z) {
+    const geometry = new THREE.SphereGeometry(0.2 + Math.random() * 0.1, 8, 8);
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.6
+    });
+    const smoke = new THREE.Mesh(geometry, material);
+    smoke.position.set(x, y, z);
+    smoke.velocity = new THREE.Vector3(
+      (Math.random() - 0.5) * 0.02,
+      0.02 + Math.random() * 0.01,
+      (Math.random() - 0.5) * 0.02
+    );
+    scene.add(smoke);
+    smokeParticles.push(smoke);
+  }
+
+  // Ball
+  const ball = new THREE.Mesh(
+    new THREE.SphereGeometry(0.6, 32, 32),
+    new THREE.MeshStandardMaterial({ color: 0xfff000 })
+  );
+  ball.position.set(-5, 0.6, 3);
+
+  const tree = new THREE.Mesh(
+    new THREE.BoxGeometry(2, 7, 2),
+    new THREE.MeshStandardMaterial({ color: 0x964B00 })
+  );
+  tree.position.set(-5, 0.6, 7);
+  scene.add(tree);
+
+  const leaves = new THREE.Mesh(
+        new THREE.BoxGeometry(5, 2, 5),
+        new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+  );
+  leaves.position.set(-5, 5, 7);
+  scene.add(leaves);
+
+  const house = new THREE.Mesh(
+    new THREE.BoxGeometry(7, 35, 7),
+    new THREE.MeshStandardMaterial({ color: 0xADD8E6 })
+  );
+  house.position.set(-5, 2, -10);
+  scene.add(house);
+
+  const door = new THREE.Mesh(
+    new THREE.BoxGeometry(3, 5, 3),
+    new THREE.MeshStandardMaterial({ color: 0x964B00 })
+  );
+
+  door.position.set(-5, 2, -7);
+  scene.add(door);
+
+  // Animation
+  let trainSpeed = 0.1;
+  let bounceAngle = 0;
+  let ballDirection = 1;
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Train movement
+    train.position.x += trainSpeed;
+    if (train.position.x > 6100) train.position.x = -95;
+
+    // Smoke emission
+    if (Math.random() < 0.6) {
+      createSmoke(train.position.x - 1.5, 3, 0);
+    }
+
+    // Animate smoke particles
+    for (let i = smokeParticles.length - 1; i >= 0; i--) {
+      const s = smokeParticles[i];
+      s.position.add(s.velocity);
+      s.material.opacity -= 0.004;
+      s.scale.multiplyScalar(1.01);
+      if (s.material.opacity <= 0) {
+        scene.remove(s);
+        smokeParticles.splice(i, 1);
+      }
+    }
+
+    // Ball bouncing
+    ball.position.x += 0.05 * ballDirection;
+    bounceAngle += 0.1;
+    ball.position.y = 0.6 + Math.abs(Math.sin(bounceAngle)) * 0.5;
+    if (ball.position.x > 8 || ball.position.x < -8) ballDirection *= -1;
+
+    // Camera follows train smoothly
+    const camTargetX = train.position.x + 4;
+    const camTargetY = 5;
+    const camTargetZ = 10;
+    camera.position.lerp(new THREE.Vector3(camTargetX, camTargetY, camTargetZ), 0.05);
+    camera.lookAt(train.position);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // Responsive
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+</body>
+</html>
