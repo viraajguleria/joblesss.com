@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <style>
+      #page {
+        background-color: black;
+      }
+
+      #title {
+        color: #0f0;
+        position: absolute;
+        top: 2.5%;
+        left: 1.5%;
+      }
+
+      #example {
+        position: absolute;
+        top: 8.5%;
+        left: 1.5%;
+        color: #0f0;
+      }
+
+      #input, #searcher {
+        position: absolute;
+        top: 14.5%;
+        left: 1.5%;
+        width: 98%;
+        height: 5%;
+      }
+
+      #searcher {
+        top: 22%;
+        width: 97%;
+        background-color: #0f0;
+      }
+
+      #output {
+        position: absolute;
+        left: 1.5%;
+        top: 29.5%;
+        height: 30%;
+        width: 98%;
+        overflow: scroll;
+        border: 1px solid #0f0;
+        color: #0f0;
+      }
+    </style>
+  </head>
+  <body id="page">
+    <center>
+      <h2 id="title">🔎 Search any movie :-</h2>
+      <p id="example">Enter something like <b>fighter</b>, You can also type any music and it will give clones of that music</p>
+      <input id="input" type="text">
+      <button onclick="search()" id="searcher">Search</button>
+      <div id="output"></div>
+    </center>
+    <script>
+      async function search() {
+        const query = document.getElementById("input").value.trim(); // ✅ Get input value
+        const output = document.getElementById("output"); // ✅ Get output element
+
+        if (!query) {
+          output.innerHTML = "<li>Please enter a search term.</li>";
+          return;
+        }
+
+        try {
+          const res = await fetch(`https://saavn.dev/api/search/songs?query=${encodeURIComponent(query)}`);
+          const data = await res.json();
+
+          output.innerHTML = '';
+
+          const songs = data.data.results;
+          if (!songs || songs.length === 0) {
+            output.innerHTML = '<li>No songs found.</li>';
+            return;
+          } 
+
+          songs.forEach(song => {
+            const div = document.createElement('div');
+            div.textContent = song.name || "Unknown Title";
+            div.style.height = "20%";
+            div.style.width = "100%";
+            div.style.border = "1px solid #0f0";
+            div.style.color = "#0f0";
+            div.style.fontSize = "200%";
+            
+            output.appendChild(div);
+          });
+
+        } catch (err) {
+          output.innerHTML = "<li>Error fetching results.</li>";
+        }
+      }
+    </script>
+  </body>
+</html>
