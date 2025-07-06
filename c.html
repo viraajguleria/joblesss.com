@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find North</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 24px;
+    }
+    #arrow {
+      font-size: 100px;
+      display: block;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div>Pointing to: <span id="direction">Unknown</span></div>
+  <div id="arrow">🧭</div>
+
+  <script>
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+      window.addEventListener('deviceorientation', handleOrientation, true);
+    } else {
+      alert("Device orientation not supported");
+    }
+
+    function handleOrientation(event) {
+      let heading = event.alpha;
+
+      if (typeof event.webkitCompassHeading !== "undefined") {
+        heading = event.webkitCompassHeading; // For iOS
+      }
+
+      if (heading !== null) {
+        document.getElementById("direction").innerText = Math.round(heading) + "°";
+        document.getElementById("arrow").style.transform = "rotate(" + (-heading) + "deg)";
+      } else {
+        document.getElementById("direction").innerText = "Not available";
+      }
+    }
+  </script>
+</body>
+</html>
