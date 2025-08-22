@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Galaxy Night Custom Tag</title>
+</head>
+<body>
+  <!-- Just the custom tag -->
+  <moon-night></moon-night>
+
+  <!-- Only one external script -->
+  <script>
+    class MoonNight extends HTMLElement {
+  connectedCallback() {
+    // Inject CSS once
+    if (!document.getElementById("moon-night-style")) {
+      const style = document.createElement("style");
+      style.id = "moon-night-style";
+      style.textContent = `
+        moon-night {
+          display: block;
+          width: 100%;
+          height: 100vh;
+          background: radial-gradient(circle at center, #0b0033, #000000 80%);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .star {
+          position: absolute;
+          border-radius: 50%;
+          background: white;
+          opacity: 0.8;
+          animation: twinkle 3s infinite ease-in-out alternate;
+        }
+
+        .moon {
+          position: absolute;
+          top: 50px;
+          right: 100px;
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          background: radial-gradient(circle, #fff, #ddd);
+          box-shadow: 0 0 40px 15px rgba(255,255,200,0.7);
+        }
+
+        .shooting-star {
+          position: absolute;
+          width: 2px;
+          height: 80px;
+          background: linear-gradient(white, transparent);
+          opacity: 0.8;
+          transform: rotate(45deg);
+          animation: shoot 1.5s linear forwards;
+        }
+
+        @keyframes twinkle {
+          from { opacity: 0.2; }
+          to   { opacity: 1; }
+        }
+
+        @keyframes shoot {
+          from { transform: translate(0,0) rotate(45deg); opacity: 1; }
+          to   { transform: translate(300px,-300px) rotate(45deg); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Add moon
+    const moon = document.createElement("div");
+    moon.classList.add("moon");
+    this.appendChild(moon);
+
+    // Add stars
+    const starCount = 120;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+
+      const size = Math.random() * 3 + 1;
+      const x = Math.random() * this.offsetWidth;
+      const y = Math.random() * this.offsetHeight;
+      const delay = Math.random() * 5;
+
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.left = x + "px";
+      star.style.top = y + "px";
+      star.style.animationDelay = delay + "s";
+
+      this.appendChild(star);
+    }
+
+    // Shooting stars (random every few seconds)
+    setInterval(() => {
+      const shootingStar = document.createElement("div");
+      shootingStar.classList.add("shooting-star");
+
+      shootingStar.style.left = Math.random() * this.offsetWidth + "px";
+      shootingStar.style.top = Math.random() * (this.offsetHeight / 2) + "px";
+
+      this.appendChild(shootingStar);
+
+      // Remove after animation ends
+      setTimeout(() => shootingStar.remove(), 1500);
+    }, 3000);
+  }
+}
+
+customElements.define("moon-night", MoonNight);
+
+  </script>
+</body>
+</html>
