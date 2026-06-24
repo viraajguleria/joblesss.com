@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Test</title>
+</head>
+<body>
 
+<h1>SQL Test</h1>
+
+<button onclick="saveData()">
+    Save joblesss.com
+</button>
+
+<script>
+async function saveData() {
+
+    const response = await fetch(
+        "http://localhost:3000/save",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: "joblesss.com"
+            })
+        }
+    );
+
+    const text = await response.text();
+
+    alert(text);
+}
+</script>
+
+</body>
+</html>
